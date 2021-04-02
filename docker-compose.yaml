@@ -1,0 +1,8 @@
+version: '3.5'
+services:
+  k8s_dockerfile:
+    build:
+      context: .
+    image: $name
+    container_name: $name
+    tty: true
