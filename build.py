@@ -53,7 +53,7 @@ class Depoly:
                          name=name)
         cls._format_yaml(name=name)
         os.system('docker-compose up -d')
-
+        os.system('git checkout docker-compose.yaml')
 
 if __name__ == '__main__':
     Depoly.exec()
