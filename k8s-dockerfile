@@ -6,7 +6,7 @@ ARG WORKDIR="app"
 RUN apt-get update
 
 # base packages
-RUN apt-get install -y g++ gcc libxslt-dev screen vim tzdata bash wget curl
+RUN apt-get install -y g++ gcc libxslt-dev screen vim tzdata bash wget curl git
 # kubectl
 RUN curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl"; chmod +x ./kubectl; mv ./kubectl /usr/local/bin/kubectl
 # helm

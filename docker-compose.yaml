@@ -1,6 +1,6 @@
 version: '3.5'
 services:
-  k8s_dockerfile:
+  service:
     build:
       context: .
     image: $name
