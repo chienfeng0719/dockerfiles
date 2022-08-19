@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: cloudsql-proxy-client:0.0.1
+    volumes:
+      - $CREDENTIAL_JSON:/config
+    entrypoint:
+      - /cloud_sql_proxy
+      - -instances=$PROJECT_NAME:$ZONE:$DB_NAME=tcp:0.0.0.0:3306
+      - -credential_file=/config
+    container_name: cloudsql_mysql
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - "80:80"
+    environment:
+      - PMA_HOST=mysql
+    container_name: cloudsql_phpmyadmin
