@@ -14,9 +14,10 @@ RUN apt-get install -y zsh && \
     sed -i 's/\/bin\/ash/\/usr\/bin\/zsh/g' /etc/passwd
 
 # 安裝 oh-my-zsh 的插件和 Powerlevel10k
-RUN sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting extract)/g' /root/.zshrc && \
+RUN sed -i 's/plugins=(git)/plugins=(git zsh-autosuggestions zsh-syntax-highlighting extract z)/g' /root/.zshrc && \
     git clone https://github.com/zsh-users/zsh-autosuggestions /root/.oh-my-zsh/custom/plugins/zsh-autosuggestions && \
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git /root/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting && \
+    git clone https://github.com/agkozak/zsh-z /root/.oh-my-zsh/custom/plugins/zsh-z && \
     sed -i 's/# DISABLE_AUTO_UPDATE="true"/DISABLE_AUTO_UPDATE="true"/g' /root/.zshrc && \
     git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /root/.oh-my-zsh/custom/themes/powerlevel10k && \
     sed -i 's/ZSH_THEME="robbyrussell"/ZSH_THEME="powerlevel10k\/powerlevel10k"/g' /root/.zshrc
