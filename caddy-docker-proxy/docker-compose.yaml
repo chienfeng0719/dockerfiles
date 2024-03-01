@@ -1,0 +1,32 @@
+version: "3.7"
+services:
+  caddy:
+    image: lucaslorentz/caddy-docker-proxy:ci-alpine
+    container_name: caddy
+    ports:
+      - 80:80
+      - 443:443
+    environment:
+      - CADDY_INGRESS_NETWORKS=caddy-network
+    networks:
+      - caddy-network
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+  whoami:
+    image: traefik/whoami
+    container_name: whoami
+    networks:
+      - caddy-network
+    labels:
+        caddy: "example.com:80"
+        caddy.reverse_proxy: "{{upstreams 80}}"
+
+networks:
+  caddy-network:
+    external: true
+
+volumes:
+  caddy-network:
+    external: true
+
